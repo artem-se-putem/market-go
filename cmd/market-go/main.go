@@ -41,7 +41,7 @@ func main() {
 
 	storage, err := postgres.New(&cfg.Postgres)
 	if err != nil {
-		log.Error("failed to init postgres", sl.Err(err))
+		log.Error("failed to init postgres", err)
 		os.Exit(1)
 	}
 
@@ -49,7 +49,7 @@ func main() {
 
 	router.Use(middleware.RequestID)
 	router.Use(middleware.Logger)
-	router.Use(mwLogger.New(log))
+	// router.Use(mwLogger.New(log))
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 
